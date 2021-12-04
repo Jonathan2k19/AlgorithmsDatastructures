@@ -1,43 +1,33 @@
 package algorithms.sorting;
 
-import java.util.List;
-
-
 /**
  * The type Selection sort.
  */
-/*
-TODO
-    - use generics (extending Comparable) instead of just supporting integers
-    - is it a good practice to call getNums() every time or should I store nums also in subclass
- */
 public class SelectionSort extends SortingAlgorithm {
 
-    /**
-     * Instantiates a new Selection sort.
-     *
-     * @param nums the nums
-     */
-    public SelectionSort(final List<Integer> nums) {
-        super(nums);
+    public SelectionSort(final int[] nums) {
+        this.sort(nums);
     }
 
     /**
      * Sorts the list using selection sort.
+     *
+     * @param nums the integer array to sort
      */
-    public void sort() {
-        for (int i = 0; i < getList().size() - 1; i++) {     // iterate through the list one-by-one
+    @Override
+    public void sort(final int[] nums) {
+        for (int i = 0; i < nums.length - 1; i++) {     // iterate through the list one-by-one
             int minIndex = i;
             // search for new minimum in unsorted part of the list
-            for (int j = i + 1; j < getList().size(); j++) {
-                if (getList().get(minIndex) > getList().get(j)) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[minIndex] > nums[j]) {
                     minIndex = j;
                 }
             }
             // swap new minimum with current element
-            int temp = getList().get(minIndex);
-            getList().set(minIndex, getList().get(i));
-            getList().set(i, temp);
+            int temp = nums[minIndex];
+            nums[minIndex] = nums[i];
+            nums[i] = temp;
         }
     }
 }
