@@ -1,10 +1,9 @@
 # DatastructuresAlgorithms
 
-A repository to play around with datastructures and algorithms, I guess in Java/C/Python. <br>
-Good reference repository: https://github.com/williamfiset/Algorithms. <br>
-Tool for generating `.gitignore` file: https://www.toptal.com/developers/gitignore.
+__Implementing common datastructures and algorithms in Java.__
 
----
++ Good reference repository: https://github.com/williamfiset/Algorithms. <br>
++ Tool for generating `.gitignore` file: https://www.toptal.com/developers/gitignore.
 
 ## DATASTRUCTURES
 
