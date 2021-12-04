@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    // About the checkstyle plugin: https://docs.gradle.org/current/userguide/checkstyle_plugin.html
+    id 'checkstyle'
+}
+
+group 'org.algodat'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    // https://mvnrepository.com/artifact/com.puppycrawl.tools/checkstyle/9.2
+    implementation 'com.puppycrawl.tools:checkstyle:9.2'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"    // show if test passed, was skipped or failed
+        showStandardStreams true                // show standard output
+    }
+}
+
+checkstyle {
+    toolVersion = "9.2"
+    ignoreFailures = false
+    showViolations = true
+    maxWarnings(0)
+    maxErrors(0)
+    configFile file("${projectDir}/config/checkstyle/checkstyle.xml")
+    reportsDir file("${buildDir}/reports/checkstyle")
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        html.enabled true
+        xml.enabled false
+    }
+}
