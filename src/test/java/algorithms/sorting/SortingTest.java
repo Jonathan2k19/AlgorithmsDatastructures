@@ -76,4 +76,22 @@ public class SortingTest {
         selectionSorter.sort(numbers);
         Assertions.assertArrayEquals(reference, numbers);
     }
+
+    @Test
+    public void testInsertionSort() {
+        generatePositiveIntegers();
+        generateReference();
+        final InsertionSort insertionSorter = new InsertionSort(numbers);
+        Assertions.assertArrayEquals(reference, numbers);
+
+        generateNegativeIntegers();
+        generateReference();
+        insertionSorter.sort(numbers);
+        Assertions.assertArrayEquals(reference, numbers);
+
+        generateMixedIntegers();
+        generateReference();
+        insertionSorter.sort(numbers);
+        Assertions.assertArrayEquals(reference, numbers);
+    }
 }
