@@ -12,10 +12,10 @@ __Implementing common datastructures and algorithms in Java.__
     + [ ] "normal" graph with adjacency list or matrix
     + [ ] minimal spanning tree
 + [ ] other datastructures
-    + [ ] stack
+    + [X] stack
     + [ ] queue: "normal" queue, dequeue, median queue with 2 heaps, priority queue
     + [ ] linked list
-    + [ ] array list with stacks
+    + [X] array list with stacks
 + [ ] trees
     + [ ] binary search tree
     + [ ] self-balancing (AVL)
@@ -35,8 +35,8 @@ __Implementing common datastructures and algorithms in Java.__
     + [ ] shortest paths: Bellman-Ford, Dijkstra, Floyd-Warshall
     + [ ] minimal spanning trees: Kruskal, Prim
 + [ ] sorting
-    + [ ] insertion sort
-    + [ ] selection sort
+    + [X] insertion sort
+    + [X] selection sort
     + [ ] merge sort
     + [ ] heap sort
     + [ ] bubble sort
