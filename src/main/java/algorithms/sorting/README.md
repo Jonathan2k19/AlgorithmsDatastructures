@@ -1,8 +1,8 @@
 # Sorting
 
-+ [ ] insertion sort
++ [X] insertion sort
 + [ ] bubble sort
-+ [ ] selection sort
++ [X] selection sort
 + [ ] merge sort
 + [ ] heap sort
 + [ ] quick sort
