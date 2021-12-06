@@ -3,95 +3,87 @@ package algorithms.sorting;
 import java.util.Arrays;
 import java.util.Random;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 /**
  * This class tests all sorting algorithms.
  */
+@TestInstance(TestInstance.Lifecycle.PER_CLASS) // otherwise, some methods have to be static
 public class SortingTest {
-    private final int[] numbers = new int[1000];       // the unsorted array we have to sort
-    private int[] reference = new int[1000];           // used to check if numbers is sorted
-    // correctly
     private final Random random = new Random();
+    private int[] mixedUnsorted;    // unsorted array of negative and positive random integers
+    private int[] mixedSorted;
+    private int[] positiveUnsorted; // unsorted array of positive random integers
+    private int[] positiveSorted;
 
     /**
-     * Generates a list of 1000 positive integers (bounded by 100) for sorting.
+     * Generates a positive and mixed array of sorted integers.
      */
-    private void generatePositiveIntegers() {
-        for (int i = 0; i < 1000; i++) {
-            numbers[i] = random.nextInt(100);
-        }
+    @BeforeEach
+    public void setup() {
+        mixedUnsorted = createMixedArray(-1000, 1000, 100);
+        mixedSorted = Arrays.copyOf(mixedUnsorted, mixedUnsorted.length);
+        Arrays.sort(mixedSorted);
+
+        positiveUnsorted = createPositiveArray(1, 1000, 100);
+        positiveSorted = Arrays.copyOf(positiveUnsorted, positiveUnsorted.length);
+        Arrays.sort(positiveSorted);
     }
 
     /**
-     * Generates a list of 1000 negative integers (bounded by -100) for sorting.
+     * A helper function to generate an array of random positive and negative integers.
+     *
+     * @param lowerBound the lower bound of integers (negative)
+     * @param upperBound the upper bound of integers (positive)
+     * @param length     the length of the wanted array
+     * @return the generated array
      */
-    private void generateNegativeIntegers() {
-        for (int i = 0; i < 1000; i++) {
-            numbers[i] = -random.nextInt(100);
-        }
-    }
-
-    /**
-     * Generates a list of 1000 negative and positive integers (bounded by +-100) for sorting.
-     */
-    private void generateMixedIntegers() {
-        final Random randomSign = new Random(); // used to determine the sign of the generated int
-        for (int i = 0; i < 1000; i++) {
-            if (randomSign.nextInt(50) % 2 == 0) {
-                numbers[i] = random.nextInt(100);      // generate positive number
+    public int[] createMixedArray(final int lowerBound, final int upperBound, final int length) {
+        final int[] array = new int[length];
+        for (int i = 0; i < length; i++) {
+            if (i % 2 == 0) {
+                array[i] = random.nextInt(upperBound);
             } else {
-                numbers[i] = -random.nextInt(100);     // generate negative number
+                array[i] = -random.nextInt(Math.abs(lowerBound));
             }
         }
+        return array;
     }
 
     /**
-     * Sorts the reference array.
+     * A helper function to generate an array of random positive integers.
+     *
+     * @param lowerBound the lower bound of integers (positive)
+     * @param upperBound the upper bound of integers (positive)
+     * @param length     the length of the wanted array
+     * @return the generated array
      */
-    private void generateReference() {
-        reference = numbers.clone();
-        Arrays.sort(reference);
+    public int[] createPositiveArray(final int lowerBound, final int upperBound, final int length) {
+        assert lowerBound < upperBound;
+        final int[] array = new int[length];
+        for (int i = 0; i < length; i++) {
+            array[i] = lowerBound + random.nextInt(upperBound - lowerBound);
+        }
+        return array;
     }
 
-    /**
-     * TEST IF THE SORTING ALGORITHMS WORK CORRECTLY.
-     * <p>FOR <Code>RadixSort</Code> ONLY POSITIVE INTEGERS CAN BE USED.</p>
-     * <p>FOR ALL OTHER ALGORITHMS: TEST POSITIVE, NEGATIVE, MIXED NUMBERS.</p>
-     */
+    /* ********************************************************
+    THE FOLLOWING METHODS TEST DIFFERENT SORTING ALGORITHMS.
+     * ********************************************************/
+
     @Test
-    public void testSelectionSort() {
-        generatePositiveIntegers();
-        generateReference();
-        final SelectionSort selectionSorter = new SelectionSort(numbers);
-        Assertions.assertArrayEquals(reference, numbers);
-
-        generateNegativeIntegers();
-        generateReference();
-        selectionSorter.sort(numbers);
-        Assertions.assertArrayEquals(reference, numbers);
-
-        generateMixedIntegers();
-        generateReference();
-        selectionSorter.sort(numbers);
-        Assertions.assertArrayEquals(reference, numbers);
+    public void insertionSortTest() {
+        final InsertionSort sorter = new InsertionSort();
+        Assertions.assertArrayEquals(positiveSorted, sorter.sort(positiveUnsorted));
+        Assertions.assertArrayEquals(mixedSorted, sorter.sort(mixedUnsorted));
     }
 
     @Test
-    public void testInsertionSort() {
-        generatePositiveIntegers();
-        generateReference();
-        final InsertionSort insertionSorter = new InsertionSort(numbers);
-        Assertions.assertArrayEquals(reference, numbers);
-
-        generateNegativeIntegers();
-        generateReference();
-        insertionSorter.sort(numbers);
-        Assertions.assertArrayEquals(reference, numbers);
-
-        generateMixedIntegers();
-        generateReference();
-        insertionSorter.sort(numbers);
-        Assertions.assertArrayEquals(reference, numbers);
+    public void selectionSortTest() {
+        final SelectionSort sorter = new SelectionSort();
+        Assertions.assertArrayEquals(positiveSorted, sorter.sort(positiveUnsorted));
+        Assertions.assertArrayEquals(mixedSorted, sorter.sort(mixedUnsorted));
     }
 }

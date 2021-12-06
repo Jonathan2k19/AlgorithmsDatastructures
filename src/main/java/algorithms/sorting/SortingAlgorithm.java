@@ -7,7 +7,8 @@ public abstract class SortingAlgorithm {
     /**
      * Sorts the numbers in the list in ascending order.
      *
-     * @param array the array of integers to sort
+     * @param array the array to sort
+     * @return the sorted array
      */
-    public abstract void sort(final int[] array);
+    public abstract int[] sort(final int[] array);
 }

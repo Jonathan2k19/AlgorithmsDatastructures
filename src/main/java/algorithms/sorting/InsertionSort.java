@@ -1,18 +1,14 @@
 package algorithms.sorting;
 
 public class InsertionSort extends SortingAlgorithm {
-
-    public InsertionSort(final int[] nums) {
-        this.sort(nums);
-    }
-
     /**
      * Sorts the specified array using insertion sort.
      *
      * @param nums the specified integer array
+     * @return the sorted array
      */
     @Override
-    public void sort(final int[] nums) {
+    public int[] sort(final int[] nums) {
         for (int i = 0; i < nums.length - 1; i++) {
             int j = i + 1;
             final int current = nums[j];
@@ -23,5 +19,6 @@ public class InsertionSort extends SortingAlgorithm {
                 j--;
             }
         }
+        return nums;
     }
 }
