@@ -37,10 +37,11 @@ __Implementing common datastructures and algorithms in Java.__
 + [ ] sorting
     + [X] insertion sort
     + [X] selection sort
+    + [X] quick sort
     + [ ] merge sort
     + [ ] heap sort
     + [ ] bubble sort
-    + [ ] quick sort
+    + [ ] optimized quick sort (median of three)
     + [ ] counting sort
     + [ ] radix sort
 + [ ] trees

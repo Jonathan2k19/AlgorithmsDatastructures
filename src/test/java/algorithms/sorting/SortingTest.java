@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -83,6 +84,20 @@ public class SortingTest {
     @Test
     public void selectionSortTest() {
         final SelectionSort sorter = new SelectionSort();
+        Assertions.assertArrayEquals(positiveSorted, sorter.sort(positiveUnsorted));
+        Assertions.assertArrayEquals(mixedSorted, sorter.sort(mixedUnsorted));
+    }
+
+    @Test
+    public void quickSortTest() {
+        final QuickSort sorter = new QuickSort();
+        Assertions.assertArrayEquals(positiveSorted, sorter.sort(positiveUnsorted));
+        Assertions.assertArrayEquals(mixedSorted, sorter.sort(mixedUnsorted));
+    }
+
+    @Test
+    public void optimizedQuickSortTest() {
+        final OptimizedQuickSort sorter = new OptimizedQuickSort();
         Assertions.assertArrayEquals(positiveSorted, sorter.sort(positiveUnsorted));
         Assertions.assertArrayEquals(mixedSorted, sorter.sort(mixedUnsorted));
     }
