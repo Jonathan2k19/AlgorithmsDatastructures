@@ -3,7 +3,11 @@
 __Implementing common datastructures and algorithms in Java.__
 
 + Good reference repository: https://github.com/williamfiset/Algorithms. <br>
-+ Tool for generating `.gitignore` file: https://www.toptal.com/developers/gitignore.
++ Tool for generating `.gitignore` file: https://www.toptal.com/developers/gitignore. However, after hours of frustration I used the `.gitignore` from williamfiset.
++ Some help for `.gitignore` problems:
+    + https://stackoverflow.com/questions/45400361/why-is-gitignore-not-ignoring-my-files#45400404
+    + https://stackoverflow.com/questions/35581983/git-rm-cached-everything-that-is-listed-in-gitignore
+
 
 ## DATASTRUCTURES
 
