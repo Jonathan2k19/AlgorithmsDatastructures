@@ -4,9 +4,15 @@ import java.util.Arrays;
 import java.util.Random;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+<<<<<<< HEAD
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+=======
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import utils.ArrayUtils;
+>>>>>>> dev
 
 /**
  * This class tests all sorting algorithms.
@@ -24,15 +30,24 @@ public class SortingTest {
      */
     @BeforeEach
     public void setup() {
+<<<<<<< HEAD
         mixedUnsorted = createMixedArray(-1000, 1000, 100);
         mixedSorted = Arrays.copyOf(mixedUnsorted, mixedUnsorted.length);
         Arrays.sort(mixedSorted);
 
         positiveUnsorted = createPositiveArray(1, 1000, 100);
+=======
+        mixedUnsorted = ArrayUtils.createMixedArray(-1000, 1000, 100);
+        mixedSorted = Arrays.copyOf(mixedUnsorted, mixedUnsorted.length);
+        Arrays.sort(mixedSorted);
+
+        positiveUnsorted = ArrayUtils.createPositiveArray(1, 1000, 100);
+>>>>>>> dev
         positiveSorted = Arrays.copyOf(positiveUnsorted, positiveUnsorted.length);
         Arrays.sort(positiveSorted);
     }
 
+<<<<<<< HEAD
     /**
      * A helper function to generate an array of random positive and negative integers.
      *
@@ -69,6 +84,8 @@ public class SortingTest {
         }
         return array;
     }
+=======
+>>>>>>> dev
 
     /* ********************************************************
     THE FOLLOWING METHODS TEST DIFFERENT SORTING ALGORITHMS.
