@@ -9,6 +9,7 @@ import javax.naming.OperationNotSupportedException;
  * <p>- <Code>pop()</Code></p>
  * <p>- <Code>isEmpty()</Code></p>
  * <p>- <Code>top()</Code></p>
+ * <p>- <Code>peek()</Code></p>
  * <p>- <Code>getSize()</Code></p>
  * <p>- <Code>printTopToBottom()</Code></p>
  * <p>- <Code>printBottomToTop()</Code></p>
@@ -71,6 +72,13 @@ public class Stack<T> {
         final T top = this.stack.getLast();
         this.pop();
         return top;
+    }
+
+    /**
+     * Returns the top-most element of the stack without removing it.
+     */
+    public T peek() {
+        return this.stack.getLast();
     }
 
     /**
