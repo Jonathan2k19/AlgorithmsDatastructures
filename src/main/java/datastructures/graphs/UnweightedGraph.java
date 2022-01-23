@@ -90,9 +90,8 @@ class UnweightedGraph<T extends Comparable<T>> {
     public HashSet<Edge<T>> getEdges(final T vertex) {
         if (this.containsVertex(vertex)) {
             return constructEdgesFromSourceVertex(vertex);
-        } else {
-            return null;
         }
+        return null;
     }
 
     /**
@@ -137,9 +136,8 @@ class UnweightedGraph<T extends Comparable<T>> {
     public boolean containsEdge(final Edge<T> edge) {
         if (adjacencyMap.containsKey(edge.getSource())) {
             return adjacencyMap.get(edge.getSource()).contains(edge.getDestination());
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
