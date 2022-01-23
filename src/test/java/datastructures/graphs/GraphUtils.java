@@ -20,7 +20,6 @@ public class GraphUtils {
         for (int i = 0; i < size; i++) {
             final int source = random.nextInt(bound);
             final int destination = random.nextInt(bound);
-            System.out.println("Source: " + source + ", destination: " + destination);
             this.graph.addDirectedEdge(source, destination);
         }
         return this.graph;

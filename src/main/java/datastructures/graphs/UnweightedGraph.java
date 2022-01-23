@@ -1,15 +1,14 @@
 package datastructures.graphs;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 /**
  * Unweighted graph class. G := (V,E)
  * <ul>
- *     <li>adjacency list</li>
+ *     <li>adjacency list/map</li>
  *        <ol>
  *          <li>space: O(|V|+|E|)</li>
  *          <li>time:  O(outdegree(from_node)) -> worst case: O(|V|)</li>
@@ -22,8 +21,7 @@ import java.util.Set;
  * </ul>
  */
 class UnweightedGraph<T extends Comparable<T>> {
-    // adjacencyList: O(|V|+|E|)
-    private final Map<T, LinkedList<T>> adjacencyMap;    // [from][to_1, to_2, ...]
+    private final HashMap<T, LinkedList<T>> adjacencyMap;    // [from][to_1, to_2, ...]
 
     public UnweightedGraph() {
         adjacencyMap = new HashMap<>();
@@ -74,7 +72,7 @@ class UnweightedGraph<T extends Comparable<T>> {
     /**
      * @return the adjacency map
      */
-    public Map<T, LinkedList<T>> getAdjacencyMap() {
+    public HashMap<T, LinkedList<T>> getAdjacencyMap() {
         return adjacencyMap;
     }
 
@@ -87,10 +85,10 @@ class UnweightedGraph<T extends Comparable<T>> {
 
     /**
      * @param vertex the source vertex
-     * @return List of all outgoing edges with vertex as source, otherwise <Code>null</Code>
+     * @return HashSet of all outgoing edges with vertex as source, otherwise <Code>null</Code>
      */
-    public List<Map<T, T>> getEdges(final T vertex) {
-        if (this.hasVertex(vertex)) {
+    public HashSet<Edge<T>> getEdges(final T vertex) {
+        if (this.containsVertex(vertex)) {
             return constructEdgesFromSourceVertex(vertex);
         } else {
             return null;
@@ -98,11 +96,11 @@ class UnweightedGraph<T extends Comparable<T>> {
     }
 
     /**
-     * @return All edges in the graph as list of maps
+     * @return All edges in the graph as HashSet of edges
      */
-    public List<Map<T, T>> getEdges() {
-        final List<Map<T, T>> allEdges = new LinkedList<>();
-        for (final Map.Entry<T, LinkedList<T>> entry : adjacencyMap.entrySet()) {
+    public HashSet<Edge<T>> getEdges() {
+        final HashSet<Edge<T>> allEdges = new HashSet<>();
+        for (final HashMap.Entry<T, LinkedList<T>> entry : adjacencyMap.entrySet()) {
             final T source = entry.getKey();
             allEdges.addAll(constructEdgesFromSourceVertex(source));
         }
@@ -110,16 +108,15 @@ class UnweightedGraph<T extends Comparable<T>> {
     }
 
     /**
-     * A helper method for the construction of edge pairs. It builds pairs of [source,destination]
+     * A helper method for the construction of edges.
      *
      * @param sourceVertex the source of the edge
-     * @return List of edges
+     * @return HashSet of edges
      */
-    private List<Map<T, T>> constructEdgesFromSourceVertex(final T sourceVertex) {
-        final List<Map<T, T>> edges = new LinkedList<>();
+    private HashSet<Edge<T>> constructEdgesFromSourceVertex(final T sourceVertex) {
+        final HashSet<Edge<T>> edges = new HashSet<>();
         for (final T destination : adjacencyMap.get(sourceVertex)) {
-            final Map<T, T> edge = new HashMap<>();
-            edge.put(sourceVertex, destination);
+            final Edge<T> edge = new Edge<>(sourceVertex, destination);
             edges.add(edge);
         }
         return edges;
@@ -129,15 +126,27 @@ class UnweightedGraph<T extends Comparable<T>> {
      * @param vertex the vertex
      * @return <Code>true</Code> if graph contains the vertex
      */
-    public boolean hasVertex(final T vertex) {
+    public boolean containsVertex(final T vertex) {
         return adjacencyMap.containsKey(vertex);
+    }
+
+    /**
+     * @param edge the edge
+     * @return <Code>true</Code> if this graph contains the edge
+     */
+    public boolean containsEdge(final Edge<T> edge) {
+        if (adjacencyMap.containsKey(edge.getSource())) {
+            return adjacencyMap.get(edge.getSource()).contains(edge.getDestination());
+        } else {
+            return false;
+        }
     }
 
     /**
      * Prints the adjacency list of the graph.
      */
     public void printGraph() {
-        for (final Map.Entry<T, LinkedList<T>> entry : adjacencyMap.entrySet()) {
+        for (final HashMap.Entry<T, LinkedList<T>> entry : adjacencyMap.entrySet()) {
             System.out.println(entry.getKey() + "\t:\t" + entry.getValue());
         }
     }
