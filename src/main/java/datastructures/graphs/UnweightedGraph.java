@@ -2,7 +2,9 @@ package datastructures.graphs;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Unweighted graph class. G := (V,E)
@@ -74,6 +76,61 @@ class UnweightedGraph<T extends Comparable<T>> {
      */
     public Map<T, LinkedList<T>> getAdjacencyMap() {
         return adjacencyMap;
+    }
+
+    /**
+     * @return the set of vertices
+     */
+    public Set<T> getVertices() {
+        return adjacencyMap.keySet();
+    }
+
+    /**
+     * @param vertex the source vertex
+     * @return List of all outgoing edges with vertex as source, otherwise <Code>null</Code>
+     */
+    public List<Map<T, T>> getEdges(final T vertex) {
+        if (this.hasVertex(vertex)) {
+            return constructEdgesFromSourceVertex(vertex);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @return All edges in the graph as list of maps
+     */
+    public List<Map<T, T>> getEdges() {
+        final List<Map<T, T>> allEdges = new LinkedList<>();
+        for (final Map.Entry<T, LinkedList<T>> entry : adjacencyMap.entrySet()) {
+            final T source = entry.getKey();
+            allEdges.addAll(constructEdgesFromSourceVertex(source));
+        }
+        return allEdges;
+    }
+
+    /**
+     * A helper method for the construction of edge pairs. It builds pairs of [source,destination]
+     *
+     * @param sourceVertex the source of the edge
+     * @return List of edges
+     */
+    private List<Map<T, T>> constructEdgesFromSourceVertex(final T sourceVertex) {
+        final List<Map<T, T>> edges = new LinkedList<>();
+        for (final T destination : adjacencyMap.get(sourceVertex)) {
+            final Map<T, T> edge = new HashMap<>();
+            edge.put(sourceVertex, destination);
+            edges.add(edge);
+        }
+        return edges;
+    }
+
+    /**
+     * @param vertex the vertex
+     * @return <Code>true</Code> if graph contains the vertex
+     */
+    public boolean hasVertex(final T vertex) {
+        return adjacencyMap.containsKey(vertex);
     }
 
     /**
