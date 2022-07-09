@@ -22,7 +22,7 @@ __THIS IS A COLLECTION OF SOME DATASTRUCTURES AND ALGORITHMS IN JAVA__
 
 + [ ] Hash table with linked list
 + [ ] graph theory
-    + [ ] "normal" graph with adjacency list or matrix
+    + [X] "normal" graph with adjacency list or matrix
     + [ ] minimal spanning tree
 + [ ] other datastructures
     + [X] stack: normal stack, minimum stack
